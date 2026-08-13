@@ -1,4 +1,4 @@
-/* html-codec.js — Alpha Toolkit */
+/* html-codec.js — Toolkit */
 (function initHtmlCodec() {
   'use strict';
 

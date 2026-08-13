@@ -2,69 +2,58 @@
 
 ## Overview
 
-Alpha Toolkit is a **fully client-side** application. Every operation — hashing, encoding, password generation, file analysis — runs in the user's browser using native Web APIs (`crypto.subtle`, `FileReader`, `Canvas`). No data is transmitted to any server, and there is no backend, database, or user authentication system.
+Toolkit is a static, client-side application. Hashing, encoding, password generation, file analysis, conversion, and image work are performed in the visitor's browser with native Web APIs such as Web Crypto, FileReader, Canvas, and `Intl`. Toolkit has no application backend, user accounts, database, or endpoint that receives tool input.
 
-This significantly reduces the attack surface compared to a typical web application. However, vulnerabilities in the client-side code (XSS, logic bugs, insecure randomness) are still taken seriously.
+This design reduces the attack surface, but it does not remove it. Cross-site scripting, unsafe output rendering, incorrect cryptographic use, cache issues, and unintended client-side persistence are security concerns and are handled seriously.
 
----
-
-## Supported Versions
+## Supported versions
 
 | Version | Supported |
-|---------|-----------|
-| 2.x (current) | Yes |
-| 1.x | No — please upgrade |
+| --- | --- |
+| `main` and the current GitHub Pages deployment | Yes |
+| Older snapshots and forks | Best effort only |
 
----
+## Reporting a vulnerability
 
-## Reporting a Vulnerability
+**Do not report security vulnerabilities in a public GitHub issue.** Open a private [GitHub Security Advisory](https://github.com/abel0x/toolkit/security/advisories/new) instead.
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+Please include:
 
-Instead, open a [GitHub Security Advisory](https://github.com/byalphas/alpha-toolkit/security/advisories/new) (private disclosure).
+- a clear vulnerability description and affected URL/tool;
+- reproducible steps or a safe proof of concept;
+- the impact and any relevant browser/version details;
+- a suggested mitigation, if you have one.
 
-Include:
-- A clear description of the vulnerability
-- Steps to reproduce or a proof-of-concept
-- The potential impact
-- Your suggested fix, if you have one
+An acknowledgement is targeted within **72 hours** and an initial status update within **7 days**. Please allow reasonable time for investigation and a fix before public disclosure.
 
-You can expect an acknowledgement within **72 hours** and a status update within **7 days**.
+## In scope
 
----
+- Cross-site scripting or HTML injection, especially in tools that render user content (for example Markdown, HTML, JSON, or SVG-related tools).
+- Insecure randomness or misuse of `crypto.getRandomValues()` and `crypto.subtle`.
+- Incorrect cryptographic behaviour, including HMAC, AES-GCM, RSA, TOTP, certificate, encoding, or verification errors that create a security risk.
+- Service-worker cache poisoning, unsafe cache handling, or offline content substitution.
+- Tool input, generated output, uploaded files, language settings, or recent-tool data persisting or being exposed unexpectedly.
+- Sensitive data leaking through an external request, referrer, console output, or browser storage outside the documented local UI state.
 
-## Scope
+## Out of scope
 
-Issues we want to hear about:
+- Vulnerabilities in locally bundled third-party libraries, unless Toolkit's integration creates the vulnerability. Please report upstream defects to the appropriate maintainer as well.
+- Self-XSS that requires pasting code into the browser console or voluntarily running an untrusted script.
+- Attacks requiring physical access to an already-unlocked device.
+- Resource exhaustion caused solely by intentionally huge local files or inputs, unless it escapes normal browser containment or creates a broader security impact.
 
-- **Cross-site scripting (XSS)** — especially in tools that render user-supplied content (Markdown preview, HTML codec, JSON formatter)
-- **Insecure randomness** — any code path that should use `crypto.getRandomValues()` but doesn't
-- **Logic errors in crypto tools** — incorrect HMAC key handling, wrong hash output, broken bcrypt verification
-- **Service Worker cache poisoning** — anything that could cause a malicious response to be served from cache
-- **Sensitive data leakage** — user input persisting beyond the session in unexpected ways (localStorage, history, referrer headers)
+## Security design
 
-Out of scope:
-
-- Vulnerabilities in third-party vendor libraries (`qrcode.min.js`, `jsQR.min.js`, `qrious.min.js`) — please report those to the upstream maintainers
-- Self-XSS (requires the user to paste malicious code into the browser console)
-- Attacks that require physical access to the user's device
-- Denial of service via large file inputs (these are handled gracefully by design)
-
----
-
-## Security Design Decisions
-
-| Decision | Reason |
-|----------|--------|
-| All crypto via `crypto.subtle` | Browser-native, audited, hardware-accelerated |
-| No `eval()` or `new Function()` anywhere | Eliminates a major XSS vector |
-| `textContent` over `innerHTML` where possible | Prevents unintended HTML injection |
-| `rel="noopener noreferrer"` on all external links | Prevents tab-napping |
-| Service Worker scope limited to same origin | No cross-origin cache manipulation |
-| No localStorage / sessionStorage for sensitive data | Hashed or encoded data is never persisted |
-
----
+| Decision | Rationale |
+| --- | --- |
+| Browser-native cryptography | Web Crypto avoids implementing sensitive primitives in application code. |
+| No application backend | Tool input has no Toolkit server destination. |
+| Self-hosted application assets | The published runtime does not depend on a third-party CDN. |
+| Careful DOM output | Prefer `textContent` and explicit escaping over rendering untrusted values as HTML. |
+| Same-origin service worker | Cache scope is limited to Toolkit's own origin and path. |
+| Minimal local state | Only a selected language and optional recent-tool slugs are stored locally; tool input and results are not persisted. |
+| External-link isolation | External links use `rel="noopener"` to avoid opener access. |
 
 ## Acknowledgements
 
-Responsible disclosures will be credited in the release notes of the fix, with the reporter's permission.
+With permission, responsible reporters may be credited in the changelog or release notes for the fix.

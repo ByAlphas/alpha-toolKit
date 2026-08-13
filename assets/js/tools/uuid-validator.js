@@ -1,4 +1,4 @@
-/* uuid-validator.js — Alpha Toolkit */
+/* uuid-validator.js — Toolkit */
 (function initUuidValidator() {
   'use strict';
 

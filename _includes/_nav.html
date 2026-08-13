@@ -1,195 +1,21 @@
-  <header>
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
-      <div class="nav-container">
-        <a href="../index.html" class="nav-brand" aria-label="Alpha Toolkit home">
-          <span class="brand-icon" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <defs><linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs>
-              <rect width="32" height="32" rx="7" fill="#0d1117"/>
-              <polygon points="16,2.5 28,9.5 28,22.5 16,29.5 4,22.5 4,9.5" stroke="url(#hexGrad)" stroke-width="1.8" fill="none"/>
-              <path d="M10.5 16 L16 9.5 L21.5 16 L16 22.5 Z" fill="url(#hexGrad)"/>
-            </svg>
-          </span>
-          <span class="brand-name">Alpha<span class="brand-accent">Toolkit</span></span>
-        </a>
-        <ul class="nav-links" role="list">
-          <li class="nav-dropdown">
-            <button class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" id="navDropBtn">
-              Tools
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="nav-mega" id="navMega" role="menu" hidden>
-              <div class="mega-col">
-                <span class="mega-cat">Security &amp; Crypto</span>
-                <a href="password.html" class="mega-link" role="menuitem">Password Generator</a>
-                <a href="hash.html" class="mega-link" role="menuitem">Hash Generator</a>
-                <a href="bcrypt.html" class="mega-link" role="menuitem">Bcrypt Hash</a>
-                <a href="hmac.html" class="mega-link" role="menuitem">HMAC Generator</a>
-                <a href="jwt-decoder.html" class="mega-link" role="menuitem">JWT Decoder</a>
-                <a href="password-strength.html" class="mega-link" role="menuitem">Password Strength</a>
-                <a href="random-token.html" class="mega-link" role="menuitem">Random Token</a>
-                <a href="uuid-validator.html" class="mega-link" role="menuitem">UUID Validator</a>
-                <a href="file-checksum.html" class="mega-link" role="menuitem">File Checksum</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Encoding &amp; Decoding</span>
-                <a href="base64.html" class="mega-link" role="menuitem">Base64</a>
-                <a href="url-codec.html" class="mega-link" role="menuitem">URL Encode / Decode</a>
-                <a href="hex-codec.html" class="mega-link" role="menuitem">Hex Encode / Decode</a>
-                <a href="html-codec.html" class="mega-link" role="menuitem">HTML Encode / Decode</a>
-                <a href="base32.html" class="mega-link" role="menuitem">Base32</a>
-                <a href="binary-text.html" class="mega-link" role="menuitem">Binary Text</a>
-                <a href="ascii.html" class="mega-link" role="menuitem">ASCII Converter</a>
-                <a href="rot13.html" class="mega-link" role="menuitem">ROT13</a>
-                <a href="case-converter.html" class="mega-link" role="menuitem">Case Converter</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">JSON &amp; Data</span>
-                <a href="json-formatter.html" class="mega-link" role="menuitem">JSON Formatter</a>
-                <a href="json-validator.html" class="mega-link" role="menuitem">JSON Validator</a>
-                <a href="json-minifier.html" class="mega-link" role="menuitem">JSON Minifier</a>
-                <a href="json-to-yaml.html" class="mega-link" role="menuitem">JSON to YAML</a>
-                <a href="yaml-to-json.html" class="mega-link" role="menuitem">YAML to JSON</a>
-                <a href="json-to-csv.html" class="mega-link" role="menuitem">JSON to CSV</a>
-                <a href="csv-to-json.html" class="mega-link" role="menuitem">CSV to JSON</a>
-                <a href="json-diff.html" class="mega-link" role="menuitem">JSON Diff</a>
-                <a href="json-sorter.html" class="mega-link" role="menuitem">JSON Sorter</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Dev Tools</span>
-                <a href="regex-tester.html" class="mega-link" role="menuitem">Regex Tester</a>
-                <a href="markdown.html" class="mega-link" role="menuitem">Markdown Previewer</a>
-                <a href="text-diff.html" class="mega-link" role="menuitem">Text Diff</a>
-                <a href="sql-formatter.html" class="mega-link" role="menuitem">SQL Formatter</a>
-                <a href="xml-formatter.html" class="mega-link" role="menuitem">XML Formatter</a>
-                <a href="html-minifier.html" class="mega-link" role="menuitem">HTML Minifier</a>
-                <a href="css-minifier.html" class="mega-link" role="menuitem">CSS Minifier</a>
-                <a href="js-minifier.html" class="mega-link" role="menuitem">JS Minifier</a>
-                <a href="http-status.html" class="mega-link" role="menuitem">HTTP Status Codes</a>
-                <a href="mime-lookup.html" class="mega-link" role="menuitem">MIME Lookup</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Text Tools</span>
-                <a href="word-counter.html" class="mega-link" role="menuitem">Word Counter</a>
-                <a href="find-replace.html" class="mega-link" role="menuitem">Find &amp; Replace</a>
-                <a href="text-sorter.html" class="mega-link" role="menuitem">Text Sorter</a>
-                <a href="deduplicate-lines.html" class="mega-link" role="menuitem">Remove Duplicates</a>
-                <a href="line-numbers.html" class="mega-link" role="menuitem">Line Numbers</a>
-                <a href="text-reverser.html" class="mega-link" role="menuitem">Text Reverser</a>
-                <a href="text-cleaner.html" class="mega-link" role="menuitem">Text Cleaner</a>
-                <a href="slug.html" class="mega-link" role="menuitem">Slug Generator</a>
-                <a href="lorem-ipsum.html" class="mega-link" role="menuitem">Lorem Ipsum</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Generators</span>
-                <a href="uuid.html" class="mega-link" role="menuitem">UUID Generator</a>
-                <a href="qr-generator.html" class="mega-link" role="menuitem">QR Code Generator</a>
-                <a href="qr-batch.html" class="mega-link" role="menuitem">QR Batch Generator</a>
-                <a href="gradient.html" class="mega-link" role="menuitem">Gradient Generator</a>
-                <a href="color-palette.html" class="mega-link" role="menuitem">Color Palette</a>
-                <a href="random-number.html" class="mega-link" role="menuitem">Random Number</a>
-                <a href="random-color.html" class="mega-link" role="menuitem">Random Color</a>
-                <a href="random-name.html" class="mega-link" role="menuitem">Random Name</a>
-                <a href="random-string.html" class="mega-link" role="menuitem">Random String</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Converters</span>
-                <a href="timestamp.html" class="mega-link" role="menuitem">Timestamp</a>
-                <a href="color-converter.html" class="mega-link" role="menuitem">Color Converter</a>
-                <a href="temperature.html" class="mega-link" role="menuitem">Temperature</a>
-                <a href="bytes.html" class="mega-link" role="menuitem">Bytes Converter</a>
-                <a href="number-base.html" class="mega-link" role="menuitem">Number Base</a>
-                <a href="unit-converter.html" class="mega-link" role="menuitem">CSS Units</a>
-                <a href="percentage.html" class="mega-link" role="menuitem">Percentage Calc</a>
-                <a href="aspect-ratio.html" class="mega-link" role="menuitem">Aspect Ratio</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Web Utilities</span>
-                <a href="url-parser.html" class="mega-link" role="menuitem">URL Parser</a>
-                <a href="url-builder.html" class="mega-link" role="menuitem">URL Builder</a>
-                <a href="query-string.html" class="mega-link" role="menuitem">Query String</a>
-                <a href="meta-tags.html" class="mega-link" role="menuitem">Meta Tag Generator</a>
-                <a href="open-graph.html" class="mega-link" role="menuitem">Open Graph Tags</a>
-                <a href="user-agent.html" class="mega-link" role="menuitem">User Agent Parser</a>
-                <a href="robots-generator.html" class="mega-link" role="menuitem">Robots.txt Generator</a>
-                <a href="fake-data.html" class="mega-link" role="menuitem">Fake Data</a>
-                <a href="random-token.html" class="mega-link" role="menuitem">Random Token</a>
-              </div>
-              <div class="mega-col">
-                <span class="mega-cat">Media &amp; Files</span>
-                <a href="image-to-base64.html" class="mega-link" role="menuitem">Image to Base64</a>
-                <a href="base64-to-image.html" class="mega-link" role="menuitem">Base64 to Image</a>
-                <a href="image-metadata.html" class="mega-link" role="menuitem">Image Metadata</a>
-                <a href="image-dimensions.html" class="mega-link" role="menuitem">Image Dimensions</a>
-                <a href="svg-optimizer.html" class="mega-link" role="menuitem">SVG Optimizer</a>
-                <a href="favicon-generator.html" class="mega-link" role="menuitem">Favicon Generator</a>
-                <a href="qr-reader.html" class="mega-link" role="menuitem">QR Code Reader</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
-          <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
-        </button>
-      </div>
-      <div class="nav-mobile" id="navLinks" hidden>
-        <ul role="list">
-          <li class="mobile-cat-label">Security &amp; Crypto</li>
-          <li><a href="password.html" class="nav-mobile-link">Password Generator</a></li>
-          <li><a href="hash.html" class="nav-mobile-link">Hash Generator</a></li>
-          <li><a href="jwt-decoder.html" class="nav-mobile-link">JWT Decoder</a></li>
-          <li><a href="bcrypt.html" class="nav-mobile-link">Bcrypt Hash Generator</a></li>
-          <li><a href="hmac.html" class="nav-mobile-link">HMAC Generator</a></li>
-          <li><a href="password-strength.html" class="nav-mobile-link">Password Strength</a></li>
-          <li><a href="random-token.html" class="nav-mobile-link">Random Token Generator</a></li>
-          <li><a href="uuid-validator.html" class="nav-mobile-link">UUID Validator</a></li>
-          <li><a href="file-checksum.html" class="nav-mobile-link">File Checksum</a></li>
-          <li class="mobile-cat-label">Encoding &amp; Decoding</li>
-          <li><a href="base64.html" class="nav-mobile-link">Base64</a></li>
-          <li><a href="url-codec.html" class="nav-mobile-link">URL Codec</a></li>
-          <li><a href="case-converter.html" class="nav-mobile-link">Case Converter</a></li>
-          <li><a href="base32.html" class="nav-mobile-link">Base32</a></li>
-          <li><a href="hex-codec.html" class="nav-mobile-link">Hex Codec</a></li>
-          <li><a href="html-codec.html" class="nav-mobile-link">HTML Codec</a></li>
-          <li><a href="binary-text.html" class="nav-mobile-link">Binary Text</a></li>
-          <li><a href="ascii.html" class="nav-mobile-link">ASCII Converter</a></li>
-          <li><a href="rot13.html" class="nav-mobile-link">ROT13</a></li>
-          <li class="mobile-cat-label">JSON &amp; Data</li>
-          <li><a href="json-formatter.html" class="nav-mobile-link">JSON Formatter</a></li>
-          <li><a href="json-validator.html" class="nav-mobile-link">JSON Validator</a></li>
-          <li><a href="json-to-yaml.html" class="nav-mobile-link">JSON to YAML</a></li>
-          <li><a href="yaml-to-json.html" class="nav-mobile-link">YAML to JSON</a></li>
-          <li><a href="json-to-csv.html" class="nav-mobile-link">JSON to CSV</a></li>
-          <li><a href="csv-to-json.html" class="nav-mobile-link">CSV to JSON</a></li>
-          <li class="mobile-cat-label">Dev &amp; Text Tools</li>
-          <li><a href="regex-tester.html" class="nav-mobile-link">Regex Tester</a></li>
-          <li><a href="markdown.html" class="nav-mobile-link">Markdown Previewer</a></li>
-          <li><a href="text-diff.html" class="nav-mobile-link">Text Diff</a></li>
-          <li><a href="sql-formatter.html" class="nav-mobile-link">SQL Formatter</a></li>
-          <li><a href="word-counter.html" class="nav-mobile-link">Word Counter</a></li>
-          <li><a href="find-replace.html" class="nav-mobile-link">Find &amp; Replace</a></li>
-          <li class="mobile-cat-label">Generators</li>
-          <li><a href="uuid.html" class="nav-mobile-link">UUID Generator</a></li>
-          <li><a href="qr-generator.html" class="nav-mobile-link">QR Generator</a></li>
-          <li><a href="lorem-ipsum.html" class="nav-mobile-link">Lorem Ipsum</a></li>
-          <li><a href="color-palette.html" class="nav-mobile-link">Color Palette</a></li>
-          <li><a href="gradient.html" class="nav-mobile-link">Gradient Generator</a></li>
-          <li><a href="random-number.html" class="nav-mobile-link">Random Number</a></li>
-          <li class="mobile-cat-label">Converters</li>
-          <li><a href="timestamp.html" class="nav-mobile-link">Timestamp</a></li>
-          <li><a href="color-converter.html" class="nav-mobile-link">Color Converter</a></li>
-          <li><a href="temperature.html" class="nav-mobile-link">Temperature</a></li>
-          <li><a href="bytes.html" class="nav-mobile-link">Bytes Converter</a></li>
-          <li><a href="number-base.html" class="nav-mobile-link">Number Base</a></li>
-          <li><a href="unit-converter.html" class="nav-mobile-link">CSS Units</a></li>
-          <li class="mobile-cat-label">Web &amp; Media</li>
-          <li><a href="url-parser.html" class="nav-mobile-link">URL Parser</a></li>
-          <li><a href="meta-tags.html" class="nav-mobile-link">Meta Tags</a></li>
-          <li><a href="open-graph.html" class="nav-mobile-link">Open Graph</a></li>
-          <li><a href="image-to-base64.html" class="nav-mobile-link">Image to Base64</a></li>
-          <li><a href="qr-reader.html" class="nav-mobile-link">QR Code Reader</a></li>
-          <li><a href="favicon-generator.html" class="nav-mobile-link">Favicon Generator</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+<nav class="navbar" id="navbar" aria-label="Main navigation">
+  <div class="nav-container">
+    <a href="{{ROOT}}index.html" class="nav-brand" aria-label="Toolkit home">
+      <span class="brand-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+          <defs>
+            <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00d4ff" />
+              <stop offset="100%" stop-color="#7c3aed" />
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="7" fill="#0d1117" />
+          <polygon points="16,2.5 28,9.5 28,22.5 16,29.5 4,22.5 4,9.5" stroke="url(#hexGrad)" stroke-width="1.8" fill="none" />
+          <path d="M10.5 16 L16 9.5 L21.5 16 L16 22.5 Z" fill="url(#hexGrad)" />
+        </svg>
+      </span>
+      <span class="brand-name">Toolkit</span>
+    </a>
+    <div class="nav-actions"></div>
+  </div>
+</nav>

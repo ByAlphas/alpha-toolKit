@@ -1,14 +1,37 @@
-# OS
+# Operating system files
 .DS_Store
 Thumbs.db
+Desktop.ini
 
-# Editor
+# Editor and local workspace settings
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# Python
+# Python bytecode and local test cache
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
 
-# Local dev server
+# Local JavaScript dependencies and logs
 node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Generated test and coverage output
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# Local-only configuration. Commit a sanitized .env.example if one is added.
+.env
+.env.*
+!.env.example
+
+# Tool caches
+.cache/

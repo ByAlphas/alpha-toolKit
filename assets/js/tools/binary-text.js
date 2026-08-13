@@ -1,4 +1,4 @@
-/* binary-text.js — Alpha Toolkit */
+/* binary-text.js — Toolkit */
 (function initBinaryText() {
   'use strict';
 

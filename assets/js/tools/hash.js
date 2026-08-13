@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/hash.js */
+/* TOOLKIT — assets/js/tools/hash.js */
 (function initHashGenerator() {
   const hashInput  = document.getElementById('hashInput');
   const hashGenBtn = document.getElementById('hashGenBtn');

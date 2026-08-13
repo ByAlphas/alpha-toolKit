@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/color-converter.js */
+/* TOOLKIT — assets/js/tools/color-converter.js */
 (function initColorConverter() {
   const swatch  = document.getElementById('colorSwatch');
   const picker  = document.getElementById('colorPicker');

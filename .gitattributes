@@ -1,0 +1,8 @@
+# Keep source diffs stable across macOS, Linux, and Windows contributors.
+* text=auto eol=lf
+
+# Binary assets must never be line-ending normalised.
+*.png binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

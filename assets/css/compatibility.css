@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════
+   TOOLKIT — compatibility.css
+   Semantic aliases shared by the older tool pages and the
+   browser-only expansion tools. Keep new UI on native classes.
+   ═══════════════════════════════════════════════════════════ */
+
+.font-mono { font-family: var(--font-mono) !important; }
+.text-muted { color: var(--text-muted) !important; }
+
+/* Form aliases */
+.form-control {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+  resize: vertical;
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-control::placeholder { color: var(--text-muted); }
+.form-control:focus {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+textarea.form-control { min-height: 120px; line-height: 1.65; }
+.form-control[readonly] {
+  cursor: default;
+  border-color: rgba(0, 212, 255, 0.12);
+  color: var(--text-code);
+  background: rgba(0, 212, 255, 0.03);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.form-group { margin-bottom: 1.2rem; }
+
+.form-select {
+  appearance: none;
+  padding-right: 2.4rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394a3b8' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-position: right 0.9rem center;
+  background-repeat: no-repeat;
+}
+
+.form-select option { color: var(--text-primary); background: var(--bg-surface); }
+
+/* Button aliases */
+.btn-primary,
+.btn.btn-primary {
+  color: #000;
+  background: linear-gradient(135deg, var(--cyan), #0099cc);
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover {
+  box-shadow: 0 6px 30px rgba(0, 212, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-secondary,
+.btn.btn-secondary {
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.18);
+}
+
+.btn-secondary:hover,
+.btn.btn-secondary:hover {
+  border-color: rgba(124, 58, 237, 0.55);
+  background: rgba(124, 58, 237, 0.28);
+}
+
+.btn-ghost,
+.btn.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-ghost:hover,
+.btn.btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-sm,
+.btn.btn-sm { min-height: unset; padding: 0.35rem 0.85rem; font-size: 0.78rem; }
+
+/* Results and feedback */
+.result-box {
+  min-height: 48px;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-code);
+  background: rgba(0, 0, 0, 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.87rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.info-row:last-child { border-bottom: 0; }
+.info-label { color: var(--text-muted); font-weight: 500; }
+.info-value { color: var(--cyan); font-family: var(--font-mono); }
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 3rem 2rem;
+  border: 2px dashed rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over,
+.drop-zone.dragover {
+  border-color: rgba(0, 212, 255, 0.45);
+  color: var(--text-primary);
+  background: rgba(0, 212, 255, 0.04);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.6rem;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 999px;
+  color: var(--cyan);
+  background: rgba(0, 212, 255, 0.12);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.badge-success { border-color: rgba(16, 217, 126, 0.2); color: var(--green); background: rgba(16, 217, 126, 0.12); }
+.badge-warning { border-color: rgba(245, 197, 66, 0.2); color: var(--yellow); background: rgba(245, 197, 66, 0.12); }
+.badge-danger { border-color: rgba(255, 77, 106, 0.2); color: var(--red); background: rgba(255, 77, 106, 0.12); }
+
+.alert {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.alert-warning { border-color: rgba(245, 197, 66, 0.25); color: var(--yellow); background: rgba(245, 197, 66, 0.07); }
+.alert-success { border-color: rgba(16, 217, 126, 0.25); color: var(--green); background: rgba(16, 217, 126, 0.07); }
+.alert-danger { border-color: rgba(255, 77, 106, 0.25); color: var(--red); background: rgba(255, 77, 106, 0.07); }
+.alert-info { border-color: rgba(0, 212, 255, 0.22); color: var(--cyan); background: rgba(0, 212, 255, 0.07); }
+
+/* Defensive layout rules for the legacy pages.  Their markup predates the
+   shared component system, so long values and paired inputs need an explicit
+   small-screen fallback. */
+.form-group,
+.input-with-btn,
+.info-row { min-width: 0; }
+
+.form-control,
+.form-select,
+.result-box,
+.info-value { min-width: 0; }
+
+.table-scroll {
+  max-width: 100%;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 212, 255, 0.35) transparent;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 480px) {
+  .input-with-btn { flex-wrap: wrap; }
+  .input-with-btn .btn { flex: 1 1 auto; }
+  .info-row { align-items: flex-start; gap: 0.75rem; }
+  .info-value { overflow-wrap: anywhere; text-align: right; }
+}

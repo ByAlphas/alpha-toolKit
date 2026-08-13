@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/password.js */
+/* TOOLKIT — assets/js/tools/password.js */
 (function initPasswordGenerator() {
   const CHARS = {
     upper:   'ABCDEFGHIJKLMNOPQRSTUVWXYZ',

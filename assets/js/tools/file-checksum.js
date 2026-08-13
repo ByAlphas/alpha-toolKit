@@ -1,4 +1,4 @@
-/* file-checksum.js — Alpha Toolkit */
+/* file-checksum.js — Toolkit */
 (function initFileChecksum() {
   'use strict';
 

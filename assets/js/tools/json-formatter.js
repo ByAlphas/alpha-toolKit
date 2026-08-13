@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/json-formatter.js */
+/* TOOLKIT — assets/js/tools/json-formatter.js */
 (function initJSONFormatter() {
   const input     = document.getElementById('jsonInput');
   const output    = document.getElementById('jsonOutput');

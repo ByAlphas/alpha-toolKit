@@ -1,4 +1,4 @@
-/* base32.js — Alpha Toolkit */
+/* base32.js — Toolkit */
 (function initBase32() {
   'use strict';
 

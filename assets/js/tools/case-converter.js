@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/case-converter.js */
+/* TOOLKIT — assets/js/tools/case-converter.js */
 (function initCaseConverter() {
   const input    = document.getElementById('caseInput');
   const grid     = document.getElementById('caseGrid');

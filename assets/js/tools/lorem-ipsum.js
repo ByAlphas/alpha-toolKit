@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/lorem-ipsum.js */
+/* TOOLKIT — assets/js/tools/lorem-ipsum.js */
 (function initLoremIpsum() {
   const countSlider = document.getElementById('loremCount');
   const countVal    = document.getElementById('loremCountVal');

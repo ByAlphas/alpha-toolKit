@@ -1,4 +1,4 @@
-/* hex-codec.js — Alpha Toolkit */
+/* hex-codec.js — Toolkit */
 (function initHexCodec() {
   'use strict';
 

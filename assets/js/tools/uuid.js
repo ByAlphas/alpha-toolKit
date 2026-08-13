@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/uuid.js */
+/* TOOLKIT — assets/js/tools/uuid.js */
 (function initUUID() {
   const uuidCount    = document.getElementById('uuidCount');
   const uuidCountVal = document.getElementById('uuidCountVal');

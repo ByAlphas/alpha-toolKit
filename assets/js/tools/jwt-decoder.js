@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/jwt-decoder.js */
+/* TOOLKIT — assets/js/tools/jwt-decoder.js */
 (function initJWTDecoder() {
   const input     = document.getElementById('jwtInput');
   const decodeBtn = document.getElementById('jwtDecodeBtn');
@@ -41,7 +41,7 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           </button>
         </div>
-        <pre class="jwt-body">${content}</pre>
+        <pre class="jwt-body">${escapeHTML(content)}</pre>
       </div>`;
   }
 
@@ -60,13 +60,13 @@
       header  = JSON.parse(b64UrlDecode(parts[0]));
       payload = JSON.parse(b64UrlDecode(parts[1]));
     } catch (e) {
-      results.innerHTML = `<p class="error-msg">Failed to decode token — ${e.message}</p>`;
+      results.innerHTML = `<p class="error-msg">Failed to decode token — ${escapeHTML(e.message)}</p>`;
       return;
     }
 
     const headerStr  = formatJSON(header);
     const payloadStr = formatJSON(payload);
-    const sigNote    = `<em style="color:var(--text-muted);font-size:.78rem;">Signature not verified — raw: ${parts[2].substring(0,32)}…</em>`;
+    const sigNote    = `Signature not verified — raw: ${parts[2].substring(0,32)}…`;
 
     let html = makePanelHTML('Header', 'header', headerStr, 'jwtCopyHeader');
     html    += makePanelHTML('Payload', 'payload', payloadStr, 'jwtCopyPayload');
@@ -85,7 +85,7 @@
       badges += `<span class="jwt-badge jwt-badge--info">Issued: ${new Date(payload.iat * 1000).toLocaleString()}</span>`;
     }
     if (payload.sub) {
-      badges += `<span class="jwt-badge jwt-badge--info">Subject: ${payload.sub}</span>`;
+      badges += `<span class="jwt-badge jwt-badge--info">Subject: ${escapeHTML(String(payload.sub))}</span>`;
     }
     badges += '</div>';
 

@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/base64.js */
+/* TOOLKIT — assets/js/tools/base64.js */
 (function initBase64() {
   const b64Input    = document.getElementById('b64Input');
   const b64Output   = document.getElementById('b64Output');

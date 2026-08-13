@@ -1,5 +1,6 @@
-/* ALPHA TOOLKIT — assets/js/tools/timestamp.js */
+/* TOOLKIT — assets/js/tools/timestamp.js */
 (function initTimestamp() {
+  const t = (key, values) => window.ToolkitI18n?.t(key, values) || key;
   const liveEl      = document.getElementById('tsLive');
   const nowBtn      = document.getElementById('tsNowBtn');
   const unixInput   = document.getElementById('tsUnixInput');
@@ -17,7 +18,9 @@
   // Live clock
   function updateLive() {
     const now = Date.now();
-    liveEl.textContent = `Now: ${Math.floor(now/1000)} (s)  ·  ${now} (ms)`;
+    liveEl.textContent = t('Now: {{seconds}} (s) · {{milliseconds}} (ms)', {
+      seconds: Math.floor(now / 1000), milliseconds: now
+    });
   }
   updateLive();
   setInterval(updateLive, 1000);

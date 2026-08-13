@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/text-diff.js */
+/* TOOLKIT — assets/js/tools/text-diff.js */
 (function initDiffChecker() {
   const textA      = document.getElementById('diffA');
   const textB      = document.getElementById('diffB');

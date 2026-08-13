@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/gradient.js */
+/* TOOLKIT — assets/js/tools/gradient.js */
 (function initGradientGenerator() {
   const angleSlider = document.getElementById('gradAngle');
   const angleVal    = document.getElementById('gradAngleVal');

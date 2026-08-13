@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/url-codec.js */
+/* TOOLKIT — assets/js/tools/url-codec.js */
 (function initURLCodec() {
   const input    = document.getElementById('urlInput');
   const output   = document.getElementById('urlOutput');

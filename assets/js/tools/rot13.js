@@ -1,4 +1,4 @@
-/* rot13.js — Alpha Toolkit */
+/* rot13.js — Toolkit */
 (function initRot13() {
   'use strict';
 

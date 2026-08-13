@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/qr-reader.js */
+/* TOOLKIT — assets/js/tools/qr-reader.js */
 (function initQRReader() {
   const dropzone  = document.getElementById('qrDropZone');
   const fileInput = document.getElementById('qrFileInput');

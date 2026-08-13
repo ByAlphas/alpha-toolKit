@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://byalphas.github.io/alpha-toolkit/sitemap.xml
+Sitemap: https://abel0x.github.io/toolkit/sitemap.xml

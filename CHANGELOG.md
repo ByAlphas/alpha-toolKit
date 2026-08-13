@@ -1,31 +1,39 @@
 # Changelog
 
-All notable changes to Alpha Toolkit are documented here.
+All notable changes to Toolkit are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and releases follow [Semantic Versioning](https://semver.org/).
 
-Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-Versioning follows [Semantic Versioning](https://semver.org/).
+## Unreleased
 
----
+## [1.1.0] — 2026-08-13
+
+### Added
+
+- Expanded the catalogue from 78 to **100 browser-only tools**, including AES-GCM, RSA key pairs, TOTP, certificate inspection, CSP and cURL builders, a header analyzer, cron and Unix permission helpers, CSS calculators, JSON conversion tools, a CSV viewer, Unicode inspection, time-zone and date-duration utilities, image compression, a sitemap generator, and WCAG contrast checking.
+- Added a global keyboard-accessible tool finder, opened with <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd>, plus an optional local-only recent-tools list.
+- Added an English/Turkish client-side interface. English is the source and default language; an explicit language choice is persisted only in the visitor's browser.
+- Added static site auditing and Firefox browser E2E coverage for the expansion-tool flows, desktop/mobile presentation, and language switching.
+
+### Changed
+
+- Renamed the public product to **Toolkit** and moved public repository and Pages references to `abel0x/toolkit`.
+- Split the stylesheet into focused core, component, compatibility, page, and feature modules for easier maintenance.
+- Centralised and regenerated tool navigation, static count copy, offline precache entries, and generated expansion-page shells through `build.py`.
+- Completed Turkish coverage for shared interface text, tool descriptions, controls, placeholders, and dynamic result strings while leaving technical values such as algorithms and headers intact.
+
+### Fixed
+
+- Normalised shared footer behaviour and layout across existing and generated tool pages.
+- Isolated browser E2E checks from service-worker precache timing so functional tests are deterministic.
 
 ## [1.0.0] — 2026-03-15
 
 ### Added
-- **78 browser-based developer tools** across 9 categories: Security & Crypto, Encoding & Decoding, JSON & Data, Text Tools, Web & URL, Image & QR, Code Tools, Converters, Generators
-- **Modular JS architecture** — each tool's logic lives in its own `assets/js/tools/*.js` IIFE module
-- **Service Worker** — full offline support with network-first for HTML, cache-first for assets; vendor libs and fonts precached on install
-- **Self-hosted variable fonts** — Space Grotesk and JetBrains Mono served from `assets/fonts/` via `@font-face`; no Google Fonts CDN calls
-- **QR tools fully offline** — `qrcode.min.js`, `jsQR.min.js`, `qrious.min.js` vendored locally under `assets/js/vendor/`
-- **Global form controls** — unified CSS for `select`, `input[type="range"]` and `input[type="checkbox"]` across all 78 tools
-- **Canonical + OG/Twitter meta tags** on all 78 tool pages and the homepage
-- **`build.py` helper** — stdlib-only Python script for nav injection, meta tag generation and script migration across the entire site
-- **`_includes/_nav.html`** — single source-of-truth nav partial injected into all pages via `build.py --nav`
-- **`tests/smoke.html`** — browser-based smoke test runner covering core utility functions
-- **Live search and category filter** on the hub page
-- **Mega menu navigation** with all 78 tools accessible in one click
-- **PWA manifest** for "Add to Home Screen" support
-- **Responsive layout** for mobile and desktop
-- **Zero external dependencies** — no frameworks, no analytics, no tracking
 
----
+- **78 browser-based developer tools** across nine categories: Security & Crypto, Encoding & Decoding, JSON & Data, Text Tools, Web & URL, Image & QR, Code Tools, Converters, and Generators.
+- A modular JavaScript architecture, with each original tool implemented in `assets/js/tools/*.js` as an IIFE module.
+- A Service Worker for offline support, self-hosted fonts, locally vendored QR libraries, canonical and social metadata, responsive layouts, live search, category filters, a mega menu, and a PWA manifest.
+- The stdlib-only `build.py` helper, a shared navigation partial, and browser smoke-test coverage.
 
-[1.0.0]: https://github.com/byalphas/alpha-toolkit/releases/tag/v1.0.0
+[Unreleased]: https://github.com/abel0x/toolkit/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/abel0x/toolkit/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/abel0x/toolkit/releases/tag/v1.0.0

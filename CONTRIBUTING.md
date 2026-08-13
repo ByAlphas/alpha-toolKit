@@ -1,161 +1,156 @@
-# Contributing to Alpha Toolkit
+# Contributing to Toolkit
 
-Thank you for your interest in contributing. This document covers everything you need to know to get started.
+Thanks for helping improve Toolkit. The project is deliberately small at runtime: static HTML, CSS, and browser-native JavaScript. Contributions should preserve its core promise—private local processing, accessibility, and offline use after the first successful load.
 
----
+## Ground rules
 
-## Ground Rules
+- Write code, comments, commit messages, and documentation in **English**.
+- Keep every tool **client-side**. Do not add APIs, telemetry, trackers, remote processors, or runtime CDN dependencies.
+- Keep every tool usable after the offline cache has been installed. Use browser APIs, self-hosted assets, and progressive enhancement.
+- Do not store tool input or results. The only permitted persistent UI state is the selected language and optional recent-tool slugs.
+- Avoid duplicate tools. Extend an existing tool when the use case and output meaning overlap.
+- Treat English as the source locale and provide polished Turkish text for every new visible label, placeholder, description, status, error, and generated message.
 
-- All code, comments, and documentation must be in **English**.
-- Tools must be **100% client-side** — no server requests, no telemetry, no external dependencies.
-- No npm, no bundlers, no build pipelines. Pure HTML + CSS + Vanilla JS only.
-- Every tool must work **offline** after the first load (Service Worker handles caching).
+## Before you start
 
----
+1. Search the [live catalogue](https://abel0x.github.io/toolkit/#tools) and `assets/js/core/tools-data.js` for an existing equivalent.
+2. Open an [issue](https://github.com/abel0x/toolkit/issues) for a feature, a new tool, or a non-trivial design change.
+3. Keep a pull request focused: one tool, one bug fix, or one cohesive maintenance change.
 
-## Ways to Contribute
+For a bug report, include the browser/version, reproducible steps, expected result, and actual result. Security-sensitive findings belong in the private process described in [SECURITY.md](SECURITY.md), not a public issue.
 
-### Reporting a Bug
+## Local setup
 
-1. Check [existing issues](https://github.com/byalphas/alpha-toolkit/issues) first.
-2. Open a new issue using the **Bug Report** template.
-3. Include: browser + version, steps to reproduce, expected vs actual behaviour.
+No install step is required. Use a local HTTP server rather than opening files directly:
 
-### Requesting a Feature or New Tool
-
-Open an issue using the **Feature Request** template. Describe the tool, its use case, and why it belongs in a client-side toolkit.
-
-### Submitting a Pull Request
-
-1. Fork the repository and create a branch from `main`.
-2. Follow the structure described below.
-3. Test in at least one Chromium-based browser and Firefox.
-4. Open a PR — keep the description concise and focused.
-
----
-
-## Adding a New Tool
-
-### 1. Create the HTML page
-
-Copy an existing tool page (e.g. `tools/base64.html`) as your starting point.
-
-Required head elements:
-```html
-<meta name="description" content="One-sentence description." />
-<link rel="canonical" href="https://byalphas.github.io/alpha-toolkit/tools/your-tool.html" />
-<meta property="og:title" content="Tool Name — Alpha Toolkit" />
-<meta property="og:description" content="One-sentence description." />
-<meta property="og:url" content="https://byalphas.github.io/alpha-toolkit/tools/your-tool.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Alpha Toolkit" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Tool Name — Alpha Toolkit" />
-<meta name="twitter:description" content="One-sentence description." />
+```bash
+git clone https://github.com/abel0x/toolkit.git
+cd toolkit
+python3 -m http.server 8080
 ```
 
-Required script tags (at end of `<body>`):
-```html
-<script src="../assets/js/core/utils.js" defer></script>
-<script src="../assets/js/core/nav.js" defer></script>
-<script src="../assets/js/tools/your-tool.js" defer></script>
-```
+Open [http://localhost:8080](http://localhost:8080). The runtime has no npm dependency. Node.js is only used for the repository checks below.
 
-### 2. Create the JS module
+## Adding or extending a tool
 
-Create `assets/js/tools/your-tool.js`. Wrap all logic in an IIFE:
+### 1. Decide the implementation shape
 
-```javascript
-(function initYourTool() {
-  'use strict';
+Use an existing, independently structured page as a starting point for a conventional tool. The 22 expansion tools share a generated shell and `assets/js/tools/expansion-tools.js`; use that route when the existing component system is a close fit.
 
-  // your tool logic here
-  // use showToast(), copyToClipboard() from utils.js
-})();
-```
+Never copy a page without updating its title, description, canonical URL, Open Graph/Twitter values, breadcrumb, module path, and Turkish text.
 
-### 3. Register the tool in tools-data.js
+### 2. Register the tool
 
-Add an entry to the `TOOLS_DATA` array in `assets/js/core/tools-data.js`:
+Add complete metadata to `assets/js/core/tools-data.js` (or, for an expansion tool, `assets/js/core/extra-tools-data.js`):
 
 ```javascript
 {
   name: 'Your Tool Name',
   slug: 'your-tool',
-  cat: 'category-id',        // security | encoding | json | text | web | image | code | converter | generator
-  catLabel: 'Category Name',
-  desc: 'Short description shown on the hub card.',
-  tags: ['tag1', 'tag2', 'tag3'],
+  cat: 'devtools',
+  catLabel: 'Dev Tools',
+  desc: 'A concise, browser-only description.',
+  tags: ['searchable', 'keywords'],
   icon: '<svg ...>...</svg>',
-},
+}
 ```
 
-### 4. Update the navigation
+The `slug` must be unique, match `tools/your-tool.html`, be present in `sitemap.xml`, and resolve through the live tool finder.
 
-Add the tool to the mega menu and mobile nav in **both** `index.html` and `_includes/_nav.html`, then run:
+### 3. Create the page and module
+
+Tool pages use the shared stylesheet modules and load shared scripts in this order at the end of `<body>`:
+
+```html
+<script src="../assets/js/core/utils.js" defer></script>
+<script src="../assets/js/core/nav.js" defer></script>
+<script src="../assets/js/core/i18n-expansion.js" defer></script>
+<script src="../assets/js/core/i18n.js" defer></script>
+<script src="../assets/js/core/tools-data.js" defer></script>
+<script src="../assets/js/core/extra-tools-data.js" defer></script>
+<script src="../assets/js/core/command-palette.js" defer></script>
+<script src="../assets/js/tools/your-tool.js" defer></script>
+```
+
+Keep a conventional tool module isolated and strict:
+
+```javascript
+(function initYourTool() {
+  'use strict';
+
+  // Use the shared helpers such as showToast() and copyToClipboard().
+  // Do not send or persist user-provided data.
+}());
+```
+
+### 4. Add localisation as part of the feature
+
+Visible English copy is the i18n source key. Add the matching Turkish value to `assets/js/core/i18n.js` for shared UI text or `assets/js/core/i18n-expansion.js` for tool-page and expansion copy. Use `ToolkitI18n.t(key, values)` for dynamic strings; do not concatenate language-dependent fragments.
+
+Verify all of the following in both English and Turkish:
+
+- headings, descriptions, labels, placeholders, help text, and buttons;
+- empty, loading, success, and error states;
+- generated results, including values interpolated into a sentence;
+- titles, navigation labels, and accessible names.
+
+### 5. Regenerate maintained output
+
+Edit `_includes/_nav.html` for shared navigation, then run the narrow maintenance commands that match the change:
 
 ```bash
-python build.py --nav
+# Shared nav, visible count copy, and complete Service Worker precache.
+python3 build.py --nav --tool-count --offline
+
+# Only when changing the generated expansion-tool template or EXPANSION_PAGES.
+python3 build.py --sync-expansion --offline
 ```
 
-This injects the updated nav into all 78+ tool pages automatically.
+`--sync-expansion` rewrites generated expansion-page shells, so inspect its diff carefully. Do not manually increment every textual tool count; `--tool-count` owns the published static copies.
 
-### 5. Update the sitemap
+### 6. Validate before opening a PR
 
-Add a `<url>` entry to `sitemap.xml`:
-
-```xml
-<url>
-  <loc>https://byalphas.github.io/alpha-toolkit/tools/your-tool.html</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+```bash
+node tests/site-audit.mjs
+node tests/expansion-e2e.mjs
 ```
 
-### 6. Update the tool count
+The first check verifies published pages, metadata, assets, navigation, and tool data. The browser E2E suite starts a local server and Firefox itself and exercises all expansion tools on desktop, mobile, and both interface languages. For a conventional new tool, manually check it in current Firefox and a Chromium browser too.
 
-Search the project for the number `78` and increment every occurrence to `79` (titles, meta descriptions, footer, hub headings, README, tools-data.js comment).
+## Style guide
 
----
+- **JavaScript:** modern browser JavaScript, strict IIFE modules, no transpilation.
+- **CSS:** use existing custom properties and the relevant modular stylesheet; do not add global one-off rules when a component or page module is appropriate.
+- **HTML:** semantic landmarks, associated labels, usable keyboard controls, meaningful `aria-*` values, and `alt` text for informative images.
+- **Copy:** short, direct English source language and natural Turkish—not word-for-word machine translation.
+- **Formatting:** two spaces for HTML, CSS, and JavaScript; keep files UTF-8 with a final newline.
 
-## Code Style
+## Build helper reference
 
-- **JavaScript**: ES2020+, no transpilation, IIFE modules, `'use strict'`
-- **CSS**: CSS custom properties for all colours and spacing; no hardcoded values where a variable exists
-- **HTML**: Semantic elements, ARIA labels on interactive controls, `alt` on all images
-- **Indentation**: 2 spaces everywhere
+`build.py` uses only the Python standard library and maintains generated/static consistency.
 
----
+| Flag | Purpose |
+| --- | --- |
+| `--nav` | Inject `_includes/_nav.html` into the published pages. |
+| `--meta` | Add missing canonical, Open Graph, and Twitter metadata to tool pages. |
+| `--scripts` | Migrate legacy script references to the modular pattern. |
+| `--enhance` | Add shared i18n and tool-finder scripts to published pages. |
+| `--styles` | Replace retired monolithic stylesheet references with page modules. |
+| `--new-tools` | Create the generated expansion tool pages and sitemap entries. |
+| `--sync-expansion` | Refresh existing generated expansion-page shells from the template. |
+| `--offline` | Rebuild the complete service-worker precache manifest. |
+| `--tool-count` | Synchronise published static tool-count copy. |
+| `--all` | Run every maintenance task; review the resulting diff especially carefully. |
 
-## Build Helper
+## Commit messages
 
-`build.py` is a stdlib-only Python script for maintaining consistency across all pages:
+Use a short imperative subject with a conventional prefix:
 
-| Flag | What it does |
-|------|-------------|
-| `--nav` | Injects `_includes/_nav.html` into all pages between `<!-- NAV:START -->` and `<!-- NAV:END -->` |
-| `--meta` | Adds canonical + OG/Twitter tags to tool pages that are missing them |
-| `--scripts` | Migrates legacy `script.js` references to the modular pattern |
-| `--all` | Runs all three passes |
-
-Run it before every deploy if you've changed the navigation.
-
----
-
-## Commit Message Style
-
-```
-type: short imperative description
-
-Examples:
-feat: add hex to RGB converter tool
-fix: correct HMAC key encoding in hmac.js
-docs: update contributing guide
-style: normalise button padding in components.css
+```text
+feat: add json schema helper
+fix: preserve HMAC key encoding
+docs: clarify offline contribution checks
+style: align tool footer spacing
 ```
 
----
-
-## Questions?
-
-Open an issue or reach out via [GitHub](https://github.com/byalphas).
+Thank you for keeping Toolkit useful, local, and dependable.

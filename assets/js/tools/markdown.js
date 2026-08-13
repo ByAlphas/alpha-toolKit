@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/markdown.js */
+/* TOOLKIT — assets/js/tools/markdown.js */
 (function initMarkdown() {
   const editor   = document.getElementById('mdInput');
   const preview  = document.getElementById('mdPreview');
@@ -85,7 +85,7 @@
   }
 
   // Default content
-  editor.value = `# Welcome to Alpha Toolkit
+  editor.value = `# Welcome to Toolkit
 
 Write **Markdown** here and see the live preview in real time.
 
@@ -99,7 +99,7 @@ Write **Markdown** here and see the live preview in real time.
 
 \`\`\`js
 // Example code block
-const msg = "Hello, Alpha Toolkit!";
+const msg = "Hello, Toolkit!";
 console.log(msg);
 \`\`\`
 

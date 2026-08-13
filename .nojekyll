@@ -1,0 +1,2 @@
+# This project is deployed as a prebuilt static Pages artifact.
+# Keep GitHub Pages from applying Jekyll processing if the publishing mode changes.

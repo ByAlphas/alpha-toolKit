@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   ALPHA TOOLKIT — assets/js/core/utils.js
+   TOOLKIT — assets/js/core/utils.js
    Shared utility functions available globally on all pages
    ═══════════════════════════════════════════════════════════ */
 
@@ -22,9 +22,14 @@ function showToast(message, type = 'success') {
   const toast = document.createElement('div');
   toast.className = `toast toast--${type}`;
   toast.setAttribute('role', 'status');
-  toast.innerHTML = `
-    <span class="toast-icon" aria-hidden="true">${icons[type] || icons.success}</span>
-    <span class="toast-msg">${message}</span>`;
+  const icon = document.createElement('span');
+  icon.className = 'toast-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.textContent = icons[type] || icons.success;
+  const text = document.createElement('span');
+  text.className = 'toast-msg';
+  text.textContent = message;
+  toast.append(icon, text);
 
   container.appendChild(toast);
 

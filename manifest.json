@@ -1,7 +1,7 @@
 {
-  "name": "Alpha Toolkit",
-  "short_name": "AlphaKit",
-  "description": "78 free developer utilities. No tracking. No backend. 100% client-side.",
+  "name": "Toolkit",
+  "short_name": "Toolkit",
+  "description": "100 free developer utilities. No tracking. No backend. 100% client-side.",
   "start_url": "index.html",
   "scope": "./",
   "display": "standalone",

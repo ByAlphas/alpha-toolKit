@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   ALPHA TOOLKIT — assets/js/pages/home.js
+   TOOLKIT — assets/js/pages/home.js
    Homepage search + filter orchestration
    Depends on: tools-data.js (TOOLS_DATA global)
    ═══════════════════════════════════════════════════════════ */
@@ -14,6 +14,55 @@
   const noResults    = document.getElementById('hubNoResults');
 
   if (!hubGrid) return; // not on the homepage
+
+  /* ── Data-driven cards for every registered tool ───────── */
+  function addMissingCards() {
+    if (typeof TOOLS_DATA === 'undefined') return;
+    const known = new Set([...hubGrid.querySelectorAll('.hub-card')]
+      .map((card) => card.getAttribute('href')?.split('/').pop()?.replace(/\.html$/, ''))
+      .filter(Boolean));
+    const fallbackIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>';
+
+    TOOLS_DATA.forEach((tool) => {
+      if (known.has(tool.slug)) return;
+      const card = document.createElement('a');
+      card.href = `tools/${tool.slug}.html`;
+      card.className = 'hub-card';
+      card.dataset.cat = tool.cat;
+      card.dataset.tags = (tool.tags || []).join(' ');
+
+      const header = document.createElement('div');
+      header.className = 'hub-card-header';
+      const icon = document.createElement('div');
+      icon.className = 'hub-card-icon';
+      icon.innerHTML = tool.icon || fallbackIcon;
+      const category = document.createElement('span');
+      category.className = 'hub-card-cat';
+      category.textContent = tool.catLabel;
+      header.append(icon, category);
+
+      const title = document.createElement('h3');
+      title.className = 'hub-card-title';
+      title.textContent = tool.name;
+      const description = document.createElement('p');
+      description.className = 'hub-card-desc';
+      description.textContent = tool.desc;
+      const footer = document.createElement('span');
+      footer.className = 'hub-card-footer';
+      footer.textContent = 'Open tool →';
+      card.append(header, title, description, footer);
+      hubGrid.appendChild(card);
+    });
+
+    const total = TOOLS_DATA.length;
+    const headingCount = document.querySelector('#hubHeading .gradient-text');
+    if (headingCount) headingCount.textContent = `${total} Tools`;
+    const title = document.title;
+    if (/\d+ Free Developer Utilities/.test(title)) document.title = title.replace(/\d+ Free Developer Utilities/, `${total} Free Developer Utilities`);
+    window.ToolkitI18n?.apply(hubGrid);
+  }
+
+  addMissingCards();
 
   /* ── State ─────────────────────────────────────────────── */
   let activeFilter = 'all';

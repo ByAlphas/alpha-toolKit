@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/regex-tester.js */
+/* TOOLKIT — assets/js/tools/regex-tester.js */
 (function initRegexTester() {
   const patternInput = document.getElementById('regexPattern');
   const flagsInput   = document.getElementById('regexFlags');

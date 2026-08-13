@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   ALPHA TOOLKIT — assets/js/core/tools-data.js
+   TOOLKIT — assets/js/core/tools-data.js
    Centralized metadata for all 78 tools
    ═══════════════════════════════════════════════════════════ */
 

@@ -1,4 +1,4 @@
-/* ALPHA TOOLKIT — assets/js/tools/qr-generator.js */
+/* TOOLKIT — assets/js/tools/qr-generator.js */
 (function initQRGenerator() {
   const modeSelect   = document.getElementById('qrMode');
   const formEl       = document.getElementById('qrForm');
@@ -12,6 +12,7 @@
   const genBtn       = document.getElementById('qrGenBtn');
   const clearQRBtn   = document.getElementById('qrClearBtn');
   const output       = document.getElementById('qrOutput');
+  const canvasWrap   = document.getElementById('qrCanvasWrap');
   const placeholder  = document.getElementById('qrPlaceholder');
   const actions      = document.getElementById('qrActions');
   const downloadBtn  = document.getElementById('qrDownloadBtn');
@@ -23,7 +24,7 @@
     text:  `<div class="qr-form-group"><label for="qrText" class="control-label">Text Content</label><textarea id="qrText" class="textarea" rows="4" placeholder="Enter any text…"></textarea></div>`,
     url:   `<div class="qr-form-group"><label for="qrURL" class="control-label">URL</label><input id="qrURL" class="input-field" type="url" placeholder="https://example.com" /></div>`,
     email: `<div class="qr-form-group"><label for="qrEmail" class="control-label">Email Address</label><input id="qrEmail" class="input-field" type="email" placeholder="hello@example.com" /></div>
-            <div class="qr-form-group"><label for="qrEmailSub" class="control-label">Subject (optional)</label><input id="qrEmailSub" class="input-field" placeholder="Hello from Alpha Toolkit" /></div>
+            <div class="qr-form-group"><label for="qrEmailSub" class="control-label">Subject (optional)</label><input id="qrEmailSub" class="input-field" placeholder="Hello from Toolkit" /></div>
             <div class="qr-form-group"><label for="qrEmailBody" class="control-label">Body (optional)</label><textarea id="qrEmailBody" class="textarea" rows="3" placeholder="Message body…"></textarea></div>`,
     phone: `<div class="qr-form-group"><label for="qrPhone" class="control-label">Phone Number</label><input id="qrPhone" class="input-field" type="tel" placeholder="+1234567890" /></div>`,
     sms:   `<div class="qr-form-group"><label for="qrSMSPhone" class="control-label">Phone Number</label><input id="qrSMSPhone" class="input-field" type="tel" placeholder="+1234567890" /></div>
@@ -77,6 +78,7 @@
     if (!content) { showToast('Please fill in the required fields', 'error'); return; }
 
     output.innerHTML = '';
+    canvasWrap?.classList.remove('qr-canvas-wrap--ready');
     placeholder.style.display = 'none';
 
     const size    = parseInt(sizeSlider.value, 10);
@@ -94,16 +96,19 @@
         colorLight: colorLight.value,
         correctLevel: ecc,
       });
+      canvasWrap?.classList.add('qr-canvas-wrap--ready');
       actions.hidden = false;
       showToast('QR code generated!', 'success');
     } catch (e) {
       showToast('Failed to generate QR: ' + e.message, 'error');
       placeholder.style.display = '';
+      canvasWrap?.classList.remove('qr-canvas-wrap--ready');
     }
   });
 
   clearQRBtn.addEventListener('click', () => {
     output.innerHTML = '';
+    canvasWrap?.classList.remove('qr-canvas-wrap--ready');
     placeholder.style.display = '';
     actions.hidden = true;
     modeSelect.value = 'text';
@@ -117,7 +122,7 @@
     const src    = canvas ? canvas.toDataURL('image/png') : img?.src;
     if (!src) { showToast('No QR code to download', 'error'); return; }
     const a = document.createElement('a');
-    a.download = 'alpha-qr.png';
+    a.download = 'toolkit-qr.png';
     a.href = src;
     a.click();
     showToast('Downloaded!', 'success');

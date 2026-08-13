@@ -18,6 +18,16 @@
     { key: 'origin',   label: 'Origin' }
   ];
 
+  function createCopyButton(value, label) {
+    const button = document.createElement('button');
+    button.className = 'btn btn-secondary';
+    button.type = 'button';
+    button.style.cssText = 'margin-top:.5rem;padding:.15rem .45rem;font-size:.7rem;';
+    button.textContent = 'Copy';
+    button.addEventListener('click', () => copyToClipboard(value, label));
+    return button;
+  }
+
   function parse() {
     const raw = urlInput.value.trim();
     if (!raw) return;
@@ -37,11 +47,16 @@
       html += `<div style="background:rgba(0,0,0,.25);border-radius:.5rem;padding:.75rem 1rem;">
         <div style="font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);margin-bottom:.25rem;">${f.label}</div>
         <div class="font-mono" style="font-size:.875rem;word-break:break-all;">${escapeHTML(val)}</div>
-        <button class="btn btn-secondary" style="margin-top:.5rem;padding:.15rem .45rem;font-size:.7rem;" onclick="copyToClipboard(${JSON.stringify(val)},'${f.label}')">Copy</button>
+        <div class="url-copy-slot" data-url-copy="${f.key}"></div>
       </div>`;
     });
     html += '</div>';
     resultEl.innerHTML = html;
+    FIELDS.forEach(f => {
+      const value = url[f.key] || '—';
+      resultEl.querySelector(`[data-url-copy="${f.key}"]`)
+        .appendChild(createCopyButton(value, f.label));
+    });
 
     // Query params table
     const params = [...url.searchParams.entries()];
@@ -52,15 +67,20 @@
     let thtml = '<h3 style="margin-bottom:.75rem;font-size:.9rem;font-weight:600;">Query Parameters</h3>';
     thtml += '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:.875rem;">';
     thtml += '<thead><tr><th style="text-align:left;padding:.4rem .6rem;border-bottom:1px solid rgba(255,255,255,.1);">Key</th><th style="text-align:left;padding:.4rem .6rem;border-bottom:1px solid rgba(255,255,255,.1);">Value</th><th></th></tr></thead><tbody>';
-    params.forEach(([k, v]) => {
+    params.forEach(([k, v], index) => {
       thtml += `<tr>
         <td class="font-mono" style="padding:.35rem .6rem;color:var(--accent-cyan,#00d4ff);">${escapeHTML(k)}</td>
         <td class="font-mono" style="padding:.35rem .6rem;word-break:break-all;">${escapeHTML(v)}</td>
-        <td style="padding:.35rem .6rem;"><button class="btn btn-secondary" style="padding:.15rem .45rem;font-size:.7rem;" onclick="copyToClipboard(${JSON.stringify(v)},'${escapeHTML(k)}')">Copy</button></td>
+        <td class="url-param-copy" style="padding:.35rem .6rem;" data-param-copy="${index}"></td>
       </tr>`;
     });
     thtml += '</tbody></table></div>';
     paramsEl.innerHTML = thtml;
+    params.forEach(([, value], index) => {
+      const button = createCopyButton(value, 'Value');
+      button.style.marginTop = '0';
+      paramsEl.querySelector(`[data-param-copy="${index}"]`).appendChild(button);
+    });
   }
 
   parseBtn.addEventListener('click', parse);

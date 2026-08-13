@@ -1,4 +1,4 @@
-/* ascii.js — Alpha Toolkit */
+/* ascii.js — Toolkit */
 (function initAscii() {
   'use strict';
 
